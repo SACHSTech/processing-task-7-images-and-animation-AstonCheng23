@@ -21,7 +21,7 @@ public class Sketch extends PApplet {
   
   PImage img;
   PImage backgroundRoom;
-  PImage starProjectile;
+  PImage projectile;
   
   /**
    * Called once at the beginning of execution, put your size all in this method
@@ -40,7 +40,7 @@ public class Sketch extends PApplet {
     
     img = loadImage("evil_eric_fabroa.jpg");
     backgroundRoom = loadImage("space.jpg");  
-    starProjectile = loadImage("april fools.jpg");
+    projectile = loadImage("april fools.jpg");
   }
 
   /**
@@ -90,13 +90,13 @@ public class Sketch extends PApplet {
     }
 
 
-    image(starProjectile, xProjectile - 20, yProjectile - 19);
+    image(projectile, xProjectile - 20, yProjectile - 19);
 
 
-    if ((xProjectile > width - 25) || (xProjectile < 0 + 25)) {
+    if ((xProjectile > width - 20) || (xProjectile < 0 + 20)) {
       xProjectileSpeed = (int) (xProjectileSpeed * -1.1);
     }
-    if ((yProjectile > height - 25) || (yProjectile < 0 + 25)) {
+    if ((yProjectile > height - 20) || (yProjectile < 0 + 20)) {
       yProjectileSpeed = (int) (yProjectileSpeed * -1.1);
     }
 
