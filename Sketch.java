@@ -1,14 +1,34 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Sketch extends PApplet {
-	
-	
+	int width = 1024;
+  int height = 640;
+
+  int x = 512;
+  int y = 320;
+  
+  double xSpeed = 0;
+  double ySpeed = 0;
+
+  double xStep = 5;
+
+  int xProjectile = 512;
+  int yProjectile = 320;
+
+  double xProjectileSpeed = 5;
+  double yProjectileSpeed = 5;
+  
+  PImage img;
+  PImage backgroundRoom;
+  PImage projectile;
+  
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
   public void settings() {
 	// put your size call here
-    size(400, 400);
+    size(width, height);
   }
 
   /** 
@@ -16,21 +36,74 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    background(210, 255, 173);
+    background(0, 0, 0);
+    
+    img = loadImage("evil_eric_fabroa.jpg");
+    backgroundRoom = loadImage("space.jpg");  
+    projectile = loadImage("april fools.jpg");
   }
 
   /**
    * Called repeatedly, anything drawn to the screen goes here
    */
   public void draw() {
-	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
+    background(backgroundRoom);    
+    image(img, x -50, y - 25);   
+    
+    if (frameCount == 120){
+      frameCount = 0;
+    }
 
-    stroke(255);
-    line(50, 125, 70, 50);  
+    if ((x > width) || (x < 0)) {
+      xSpeed = xSpeed * -1.1;
+      x = 0;
+    }
+    if ((y > height) || (y < 0)) {
+      ySpeed = ySpeed * -1.1;
+    }
+
+    x = (int) (x + (int) xSpeed);
+    y = (int) (y + (int) ySpeed);
+
+    println(x + " " + y + " " + frameCount + " " + xProjectile + " " + yProjectile);
+
+    y = (int) (-0.002 * (x - 0)*(x - width));
+    x += 5;
+     
+    projectileEight(x, y);
+
+
   }
   
   // define other methods down here.
+
+  /**
+   * Makes the second projectile. xProjectileLast and yProjectileLast remember the last x and y positions of the fabroa, and changes every 60 seconds.
+   * @param xProjectileLast
+   * @param yProjectileLast
+   */
+  public void projectileEight(int xProjectileLast, int yProjectileLast){ 
+
+    if (frameCount == 60){
+      xProjectile = xProjectileLast;
+      yProjectile = yProjectileLast;   
+    }
+
+
+    image(projectile, xProjectile - 20, yProjectile - 19);
+
+
+    if ((xProjectile > width - 20) || (xProjectile < 0 + 20)) {
+      xProjectileSpeed = (int) (xProjectileSpeed * -1.1);
+    }
+    if ((yProjectile > height - 20) || (yProjectile < 0 + 20)) {
+      yProjectileSpeed = (int) (yProjectileSpeed * -1.1);
+    }
+
+    xProjectile = (int) (xProjectile + (int) xProjectileSpeed);
+    yProjectile = (int) (yProjectile + (int) yProjectileSpeed);
+
+      
+  }
+
 }
