@@ -93,10 +93,10 @@ public class Sketch extends PApplet {
     image(starProjectile, xProjectile - 20, yProjectile - 19);
 
 
-    if ((xProjectile > width) || (xProjectile < 0)) {
+    if ((xProjectile > width - 25) || (xProjectile < 0 + 25)) {
       xProjectileSpeed = (int) (xProjectileSpeed * -1.1);
     }
-    if ((yProjectile > height) || (yProjectile < 0)) {
+    if ((yProjectile > height - 25) || (yProjectile < 0 + 25)) {
       yProjectileSpeed = (int) (yProjectileSpeed * -1.1);
     }
 
